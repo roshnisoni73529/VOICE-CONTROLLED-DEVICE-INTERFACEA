@@ -1,154 +1,137 @@
-# VOICE-CONTROLLED-DEVICE-INTERFACEA
-C# Windows Forms based offline voice-controlled device management system with serial communication to microcontrollers. Supports predefined voice commands, GUI controls, and real-time device feedback.
+# Smart Home Voice Control System (.NET Windows Forms)
 
+A sophisticated Windows desktop application for controlling smart home devices using voice commands and manual controls.
 
+## Features
 
+### 🎤 Voice Recognition
+- Real-time speech recognition using Windows Speech API
+- Natural language command processing
+- Audio feedback with text-to-speech responses
+- High confidence threshold for accurate recognition
 
-## **Overview**
+### 🏠 Device Management
+- Support for multiple device types:
+  - **Lights** - On/Off control with brightness levels
+  - **Fans** - Speed control (0-100%)
+  - **Air Conditioners** - Temperature control (16-30°C)
+  - **Speakers** - Volume control (0-100%)
+- Real-time device status display
+- Manual device control via double-click
 
-The **Voice-Controlled Device Management System** is a Windows desktop application that allows users to control external devices (such as Arduino-based circuits) through **offline voice commands**.
+### 🗣️ Voice Commands
+- **Power Control**: "Turn on living room light", "Turn off bedroom fan"
+- **Adjustment**: "Increase fan speed", "Decrease volume", "Set temperature to 24"
+- **Natural Language**: Supports various phrasings and device references
 
-It is designed for:
+### 🖥️ User Interface
+- Modern Windows Forms design with professional styling
+- Real-time command display and system responses
+- Device status grid with color-coded indicators
+- Manual testing interface for command validation
 
-* Students
-* Hobbyists
-* Educators
-* Prototype developers
-* Accessibility solutions
+## System Requirements
 
-This system works **fully offline**, uses **C# (Windows Forms)**, and communicates with hardware using the **Serial Port (COM)** interface.
+- **OS**: Windows 10/11
+- **Framework**: .NET 8.0
+- **Audio**: Microphone for voice input, speakers for audio feedback
+- **Memory**: 100MB RAM minimum
 
+## Installation & Setup
 
+1. **Prerequisites**:
+   - Install .NET 8.0 Runtime
+   - Ensure microphone permissions are enabled
 
-##  **Key Features**
+2. **Build & Run**:
+   ```bash
+   dotnet restore
+   dotnet build
+   dotnet run
+   ```
 
-✔ **Offline Speech Recognition** using `System.Speech.Recognition`
-✔ **C# Windows Forms GUI** for easy interaction
-✔ **Serial communication** with Arduino or similar devices
-✔ **Predefined voice commands** (e.g., “Turn on light”)
-✔ **Real-time device status display**
-✔ **Lightweight & beginner-friendly**
-✔ **No internet required**
-✔ **Fully customizable command list**
+3. **First Launch**:
+   - Click "Start Listening" to begin voice recognition
+   - Test commands using the manual input field
+   - Double-click devices in the list to toggle manually
 
+## Voice Command Examples
 
+### Basic Control
+- "Turn on living room light"
+- "Switch off ceiling fan"
+- "Start smart speaker"
 
-##  **Tech Stack**
+### Adjustments
+- "Increase bedroom light brightness"
+- "Set air conditioner to 22 degrees"
+- "Turn up speaker volume"
+- "Decrease fan speed"
 
-| Component            | Technology                     |
-| -------------------- | ------------------------------ |
-| Programming Language | C#                             |
-| Framework            | .NET Framework / Windows Forms |
-| Speech Engine        | System.Speech.Recognition      |
-| Hardware Interface   | SerialPort (COM Port)          |
-| External Device      | Arduino / Microcontroller      |
+### Specific Values
+- "Set living room light to 75 percent"
+- "Set temperature to 24"
+- "Set volume to 60"
 
+## Architecture
 
+### Core Components
+- **MainForm.cs**: Primary UI and application logic
+- **Device.cs**: Device model with properties and status methods
+- **VoiceCommandProcessor.cs**: Natural language processing engine
+- **Program.cs**: Application entry point
 
-##  **Project Structure**
+### Speech Integration
+- **Recognition**: Windows Speech Recognition Engine
+- **Synthesis**: Text-to-speech for system responses
+- **Grammar**: Dynamic grammar generation for device names
 
-``
-/Voice-Controlled-Device-Management
-│── /src
-│   ├── MainForm.cs
-│   ├── SpeechModule.cs
-│   ├── SerialCommunication.cs
-│   └── Program.cs
-│
-│── /docs
-│   └── Report.pdf (optional)
-│
-│── README.md
-│── LICENSE
-│── .gitignore
+### Device Management
+- **State Management**: Real-time device status tracking
+- **Command Mapping**: Intelligent device identification from voice input
+- **Visual Feedback**: Color-coded status indicators
+
+## Customization
+
+### Adding New Devices
+```csharp
+devices.Add(new Device("id", "Device Name", DeviceType.Light, "Location", false, 0));
 ```
 
----
+### Modifying Voice Commands
+Edit the grammar builder in `InitializeSpeech()` method to add new command patterns.
 
-## 🚀 **How It Works**
+### Styling
+Modify colors and fonts in `MainForm.Designer.cs` for custom appearance.
 
-1. User speaks a command (e.g., “Turn on fan”)
-2. Speech recognizer converts voice → text (offline)
-3. Command processor matches the text with predefined commands
-4. Serial command is sent to Arduino (e.g., `FAN_ON`)
-5. Arduino performs the required action and sends feedback
-6. GUI updates device status in real time
+## Troubleshooting
 
+### Speech Recognition Issues
+- Ensure microphone is working and permissions are granted
+- Check Windows Speech Recognition is enabled in system settings
+- Speak clearly and at moderate pace
 
-##  **Predefined Commands**
+### Device Control Problems
+- Verify device names match voice commands
+- Use manual test feature to validate command processing
+- Check system response messages for feedback
 
-| Voice Command    | Action            |
-| ---------------- | ----------------- |
-| “Turn on light”  | Sends `LIGHT_ON`  |
-| “Turn off light” | Sends `LIGHT_OFF` |
-| “Turn on fan”    | Sends `FAN_ON`    |
-| “Turn off fan”   | Sends `FAN_OFF`   |
+## Future Enhancements
 
-*(You can add more commands in `SpeechModule.cs`.)*
+- **Hardware Integration**: Serial/USB communication with actual devices
+- **Network Control**: WiFi/Bluetooth device connectivity
+- **Scheduling**: Timer-based device automation
+- **Profiles**: User-specific device configurations
+- **Mobile App**: Companion mobile application
 
+## Technical Notes
 
-
-## **Hardware Setup**
-
-* Microcontroller (Arduino recommended)
-* USB cable
-* LED / Relay / Motor
-* Install Arduino IDE
-* Upload a simple sketch to read serial commands and control devices
-
-Example Arduino Command Handler:
-
-if (Serial.available()) {
-    String cmd = Serial.readStringUntil('\n');
-
-    if (cmd == "LIGHT_ON") digitalWrite(LED, HIGH);
-    if (cmd == "LIGHT_OFF") digitalWrite(LED, LOW);
-}
-```
+- Uses Windows Speech Platform for voice recognition
+- Implements confidence-based command filtering
+- Thread-safe device state management
+- Extensible architecture for new device types
 
 ---
 
-##  **System Requirements**
-
-* Windows 7 / 8 / 10 / 11
-* .NET Framework 4.7+
-* Microphone
-* COM Port (for Arduino)
-
----
-
-##  **Screenshots** *(Optional – You can add later)*
-
-<img width="525" height="291" alt="image" src="https://github.com/user-attachments/assets/5afd5684-efbd-4843-bd24-9302ad06a215" />
-
-
-
-
-
-
-
-
-
-##  **Testing**
-
-* Unit tests for speech recognition
-* Serial communication testing using Arduino Serial Monitor
-* Real-time testing with hardware
-* Peer feedback collection
-  
-##  **Future Enhancements**
-
-🔹 Add multiple device support
-🔹 Add voice feedback
-🔹 Add database for saving logs
-🔹 Improve UI layout
-🔹 Add custom command creation
-
-##  **Author**
-**Roshni Soni**
-B.E. Computer Science Engineering
-Chandigarh University
-
-
-
-
+**Developed with .NET 8.0 Windows Forms**  
+*Professional smart home automation solution*
