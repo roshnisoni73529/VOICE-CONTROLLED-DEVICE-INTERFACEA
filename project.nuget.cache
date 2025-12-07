@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ObkxqfSf8v0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\praka\\Downloads\\project-bolt-sb1-nbrwvo5s (1)\\project\\SmartHomeVoiceControl.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\praka\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\praka\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
